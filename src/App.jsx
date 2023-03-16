@@ -4,7 +4,7 @@ import './App.scss'
 import Location from './assets/components/Location'
 import ResidentInfo from './assets/components/ResidentInfo'
 import Loader from './assets/components/Loader'
-import Selection from './assets/components/Selection'
+import Pagination from './assets/components/Pagination'
 
 function App() {
 
@@ -14,11 +14,13 @@ function App() {
   const [arrayLocations, setArrayLocations] = useState([])
   const [isLoading, setIsLoading] = useState(true)
   const [isVisible, setIsVisible] = useState(false)
+  const [currentPage, setCurrentPage] = useState (1)
+  const [residentsPerPage] = useState(15)
 
   const stayLoading = () => {
     setTimeout(() => {
       setIsLoading(false)
-    }, 2500)
+    }, 500)
   }
 
   const getRandomAPI = () => {
@@ -39,7 +41,6 @@ function App() {
       .then(resp => setArrayLocations(resp.data.results))
       .catch(error => console.error(error))
     }
-
   }
 
   const getAPIByLocation = (location) => {
@@ -64,6 +65,10 @@ function App() {
 
   getAPIByCharacter(charactersSearched)
 
+  const indexOfLastResident = currentPage * residentsPerPage
+  const indexOfFirstResident = indexOfLastResident - residentsPerPage
+  const currentResidents = residentsArray.slice(indexOfFirstResident,indexOfLastResident)
+  const paginate = pageNumber => setCurrentPage (pageNumber)
 
   return (
     <div className="App">
@@ -88,7 +93,7 @@ function App() {
       <main className='App-main'>
       <h2 className='App-h2'>Residents</h2>
         <ul className='App-ul'>
-          {residentsArray.map((url,index) => (
+          {currentResidents.map((url,index) => (
             <ResidentInfo
             url = {url}
             key = {index}
@@ -96,10 +101,12 @@ function App() {
           ))}
         </ul>
       </main>
-      <footer>
-        <nav>
-
-        </nav>
+      <footer className='App-footer'>
+        <Pagination
+          residentsPerPage = {residentsPerPage}
+          totalResidents = {residentsArray.length}
+          paginate = {paginate}
+        />
       </footer>
     </div>
   )

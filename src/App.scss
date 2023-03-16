@@ -79,6 +79,8 @@
 .App{
   @include flex(column, center, center, 5em);
   height: 100%;
+  margin: auto;
+  max-width: 1300px;
   padding: 1em;
   width: 100%;
 
@@ -92,7 +94,7 @@
 
   &-img{
     @include responsive(1400px){
-      justify-self: center;
+      justify-self: start;
     }
     
   }
@@ -163,8 +165,9 @@
   }
 
   &-h2{
+    color: var(--yellow);
     font-size: 2em;
-    color: var(--yellow)
+    letter-spacing: .1em;
   }
 
   &-ul{
@@ -180,18 +183,27 @@
     }
   }
 
- 
+  &-footer{
+    padding: 3em 0;
+    width: 100%;
 
-}
+    @include responsive(700px){
+      padding: 15em 0;
+    }
 
-.Selection{
-  @include flex(column, center, start, .5em);
-  background-color: var(--yellow);
-  border: solid 3px var(--red);
-  border-radius: 15px;
-  color: var(--red);
-  padding: 1em;
-  width: 99%;
+    // @include responsive(980px){
+    //   padding: 18em 0;
+    // }
+
+    // @include responsive(1200px){
+    //   padding: 25em 0;
+    // }
+
+    // @include responsive(1900px){
+    //   padding: 90em 0;
+    // }
+  }
+
 }
 
 .Location{
@@ -340,4 +352,22 @@
   }
 }
 
+.Pagination{
+  width: 100%;
 
+  &-ul{
+    @include flex(row, center, center, 1em);
+    width: 100%;
+  }
+
+  &-li{
+    background-color: var(--yellow);
+    border: solid 3px var(--red);
+    border-radius: 50%;
+    padding: 1em 1.3em;
+  }
+
+  &-a{
+    color: var(--red);
+  }
+}
