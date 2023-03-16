@@ -1,0 +1,15 @@
+*{
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+body{
+  background: url(/frame.png) top no-repeat,
+  url(/foot.png) bottom no-repeat;
+  background-color: var(--black);
+  background-size: 100% auto;
+  font-family: 'Roboto', sans-serif;
+  font-size: 100%;
+  min-height: 100vh;
+}

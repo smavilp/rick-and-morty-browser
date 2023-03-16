@@ -1,0 +1,289 @@
+/*VARIABLES*/
+
+:root{
+
+  //Colors
+  --black: #000000;  
+  --gray: #938686;
+  --white: #FFFFFF;
+  --ligth-violet: #C9BEDC;
+  --red: #893446;
+  --violet: #856888;
+  --yellow: #EDE288;
+
+  //Font weight
+  --regular: 400;
+  --medium: 500;
+  --semi-bold: 600;
+  --bold: 700;
+}
+
+/*MIXINS*/
+
+@mixin flex ($direction, $just, $align, $gap){
+  display: flex;
+  flex-direction: $direction;
+  justify-content: $just;
+  align-items: $align;
+  gap: $gap;
+}
+
+@mixin font ($color, $size,$weight){
+  color: $color;
+  font-size: $size;
+  font-weight: $weight;
+}
+
+@mixin grid ($columns, $rows, $gap){
+  display: grid;
+  grid-template-columns: repeat($columns,1fr);
+  grid-template-rows: repeat($rows, 1fr);
+  gap: $gap;
+}
+
+@mixin responsive ($min_width){
+  @media screen and (min-width: $min_width){
+    @content;
+  }
+}
+
+
+/*STYLES*/
+
+.App{
+  @include flex(column, center, center, 5em);
+  height: 100%;
+  padding: 1em;
+  width: 100%;
+
+  &-header{
+    @include flex(column, center, center, 3em);
+    width: 100%;
+    @include responsive(780px){
+      @include grid(2, 3, 0);
+    }
+  }
+
+  &-img{
+    @include responsive(1400px){
+      justify-self: center;
+    }
+    
+  }
+
+  &-nav{
+    width: 100%;
+  }
+
+  &-form{
+    @include flex(column, center, center, 0);
+    width: 100%;
+    justify-self: center;
+    max-width: 70em;
+  }
+
+  &-input{
+    background-color: var(--yellow);
+    border: solid 3px var(--red);
+    border-radius: 15px;
+    color: var(--red);
+    padding: .5em 1em;
+    width: 100%;
+
+    &::placeholder{
+      color: var(--red);
+    }
+  }
+
+  &-datalist{
+    background-color: var(--yellow);
+  }
+
+  &-select{
+    background-color: var(--yellow);
+    color: var(--red);
+    width: 100%;
+  }
+
+  &-h1{
+    color: var(--yellow);
+    letter-spacing: .1em;
+    grid-column: 1/3;
+    justify-self: center;
+  }
+
+  &-main{
+    @include flex(column, center, center, 12em);
+    width: 100%;
+  }
+
+  &-h2{
+    font-size: 2em;
+    color: var(--yellow)
+  }
+
+  &-ul{
+    @include flex(column, center, center, 12em);
+    width: 100%;
+    @include responsive(780px){
+      @include grid(2, auto, 0);
+      row-gap: 10em;
+    }
+    @include responsive(1200px){
+      @include grid(3, auto, 0);
+      row-gap: 10em;
+    }
+  }
+
+ 
+
+}
+
+
+.Location{
+  border: 8px solid var(--red);
+  border-radius: 30px;
+  max-width: 22.5em;
+  position: relative;
+  grid-column: 1/3;
+  justify-self: center;
+
+  &-img{
+    border: 8px solid var(--red);
+    border-radius: 50%;
+    height: 10em;
+    position: absolute;
+    left: 28%;
+    top: -50%;
+    width: 10em;
+    z-index: 1;
+  }
+
+  &-div--1{
+    border: 8px solid var(--red);
+    border-radius: 30px;
+    height: 100%;
+    position: relative;
+    width: 100%;
+  }
+
+  &-div--2{
+    background-color: var(--violet);
+    border-radius: 20px;
+    height: 100%;
+    width: 100%;
+  }
+
+  &-div--3{
+    @include flex(column, center, start, 0);
+    background-color: var(--ligth-violet);
+    border-radius: 24px 24px 180px 24px;
+    height: 100%;
+    padding: 2.5em 1em .5em 1.5em;
+    width: 96%;
+  }
+
+  &-table{
+    border-spacing: 1.3em
+  }
+
+  &-th{
+    @include font(var(--red),.8em,var(--regular));
+    text-align: center;
+    text-transform: uppercase;
+  }
+
+  &-td{
+    text-align: center;
+    @include font(var(--white),.8em,var(--regular) )
+  }
+
+  &-div--4{
+    background-color: var(--yellow);
+    border-radius: 16px;
+    padding: .5em 0;
+    position: absolute;
+    width: 100%;
+    top: 0
+  }
+
+  &-h2{
+    @include font(var(--red), 1.5em, var(--medium));
+    text-align: center;
+  }
+}
+
+.ResidentInfo{
+  width: 100%;
+  max-width: 22.5em;
+  position: relative;
+  justify-self: center;
+
+  &-img{
+    border: 8px solid var(--red);
+    border-radius: 50%;
+    height: 10em;
+    position: absolute;
+    left: 28%;
+    top: -50%;
+    width: 10em;
+    z-index: 1;
+  }
+
+  &-div--1{
+    border: 8px solid var(--red);
+    border-radius: 30px;
+    height: 100%;
+    position: relative;
+    width: 100%;
+  }
+
+  &-div--2{
+    background-color: var(--violet);
+    border-radius: 20px;
+    height: 100%;
+    width: 100%;
+  }
+
+  &-div--3{
+    @include flex(column, center, start, 0);
+    background-color: var(--ligth-violet);
+    border-radius: 24px 24px 180px 20px;
+    height: 100%;
+    padding: 5em 0 1em 3em ;
+    width: 96%;
+  }
+
+  &-table{
+    border-spacing: 1em
+  }
+
+  &-th{
+    @include font(var(--red),.8em,var(--regular));
+    text-align: start;
+    text-transform: uppercase;
+  }
+
+  &-td{
+    padding-left: 1em;
+    @include font(var(--white),.8em,var(--regular) )
+  }
+
+  &-div--4{
+    background-color: var(--yellow);
+    border-radius: 20px;
+    height: 35%;
+    padding-top: 2.2em;
+    position: absolute;
+    width: 100%;
+    top: 0
+  }
+
+  &-h2{
+    @include font(var(--red), 1.5em, var(--medium));
+
+    text-align: center;
+  }
+}
+
+
