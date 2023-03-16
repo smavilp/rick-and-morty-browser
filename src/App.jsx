@@ -20,7 +20,7 @@ function App() {
   const stayLoading = () => {
     setTimeout(() => {
       setIsLoading(false)
-    }, 3500)
+    }, 2500)
   }
 
   const getRandomAPI = () => {
