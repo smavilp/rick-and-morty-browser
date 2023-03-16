@@ -50,6 +50,32 @@
 
 /*STYLES*/
 
+.Loader{
+  @include flex(column, center, center, 0);
+  background-color: var(--black);
+  min-width: 100vw;
+  min-height: 100vh;
+  position: fixed;
+  top: 0;
+  right: 0;
+  z-index: 3;
+
+  &-img{
+    animation: rotation 2s infinite linear;
+    width: 9em
+  }
+
+  @keyframes rotation {
+    from{
+      transform: rotate(0deg)
+    }
+    
+    to{
+      transform: rotate(360deg)
+    }
+  }
+}
+
 .App{
   @include flex(column, center, center, 5em);
   height: 100%;
@@ -80,6 +106,7 @@
     width: 100%;
     justify-self: center;
     max-width: 70em;
+    position: relative;
   }
 
   &-input{
@@ -95,8 +122,26 @@
     }
   }
 
-  &-datalist{
+  &-div{
+    @include flex(column, center, start, 0);
     background-color: var(--yellow);
+    border: solid 3px var(--red);
+    border-radius: 15px;
+    color: var(--red);
+    position: absolute;
+    top: 100%;
+    width: 99%;
+    z-index: 2;
+  }
+
+
+  &-span{
+    padding: .5em;
+    width: 100%;
+    &:hover{
+      background-color: #C9BEDC;
+      cursor: pointer;
+    }
   }
 
   &-select{
@@ -139,6 +184,15 @@
 
 }
 
+.Selection{
+  @include flex(column, center, start, .5em);
+  background-color: var(--yellow);
+  border: solid 3px var(--red);
+  border-radius: 15px;
+  color: var(--red);
+  padding: 1em;
+  width: 99%;
+}
 
 .Location{
   border: 8px solid var(--red);

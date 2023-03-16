@@ -3,6 +3,8 @@ import axios from 'axios'
 import './App.scss'
 import Location from './assets/components/Location'
 import ResidentInfo from './assets/components/ResidentInfo'
+import Loader from './assets/components/Loader'
+import Selection from './assets/components/Selection'
 
 function App() {
 
@@ -10,6 +12,14 @@ function App() {
   const [residentsArray, setResidentsArray] = useState([])
   const [charactersSearched, setCharactersSearched] = useState("")
   const [arrayLocations, setArrayLocations] = useState([])
+  const [isLoading, setIsLoading] = useState(true)
+  const [isVisible, setIsVisible] = useState(false)
+
+  const stayLoading = () => {
+    setTimeout(() => {
+      setIsLoading(false)
+    }, 2500)
+  }
 
   const getRandomAPI = () => {
     let randomId = Math.floor(Math.random()*126) + 1
@@ -41,8 +51,15 @@ function App() {
     .catch(error => console.error(error))
   }
 
+  const closeSelection = (location) => {
+    getAPIByLocation(location)
+    setIsVisible(false)
+
+  }
+
   useEffect(() => {
     getRandomAPI()
+    stayLoading()
   }, [])
 
   getAPIByCharacter(charactersSearched)
@@ -50,17 +67,17 @@ function App() {
 
   return (
     <div className="App">
+      {isLoading && <Loader />}
       <header className='App-header'>
         <img className='App-img' src="/logo.svg" alt="" />
         <nav className='App-nav'>
           <form className='App-form' onChange={e =>{
             e.preventDefault()
             setCharactersSearched(e.target.value)
+            setIsVisible(true)
           }}>
-            <input className='App-input' type="text" name='search' placeholder='Search location' preventDefault />
-              <select className='App-select' name="" id="" onChange={e => {getAPIByLocation(e.target.value)}}>
-                {arrayLocations.map( (location, index) => (<option key={index}> {location.name} </option>))}
-              </select>
+            <input className='App-input' type="text" name='search' placeholder='Search location'/>
+              {isVisible ? <div className='App-div'> {arrayLocations.map( (location, index) => (<span className='App-span' onClick={e => closeSelection(e.target.textContent)} key={index}> {location.name} </span>))}</div> : null}
           </form>
         </nav>
         <h1 className='App-h1'>Location</h1>
