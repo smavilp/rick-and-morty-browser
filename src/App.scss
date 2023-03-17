@@ -141,7 +141,7 @@
     padding: .5em;
     width: 100%;
     &:hover{
-      background-color: #C9BEDC;
+      background-color: var(--ligth-violet);
       cursor: pointer;
     }
   }
