@@ -13,7 +13,7 @@ const ResidentInfo = ({url}) => {
     .catch(error => console.error(error))
 
   return (
-    <article className='ResidentInfo'>
+    <li className='ResidentInfo'>
       <img className='ResidentInfo-img' src={residentData?.image} alt="" />
       <div className='ResidentInfo-div--1'>
         <div className='ResidentInfo-div--2'>
@@ -44,7 +44,7 @@ const ResidentInfo = ({url}) => {
           <h2 className='ResidentInfo-h2'>{residentData?.name}</h2>
         </div>
       </div>
-    </article>
+    </li>
   );
 };
 

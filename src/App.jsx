@@ -50,12 +50,13 @@ function App() {
       setLocationData(resp.data.results[0])
     })
     .catch(error => console.error(error))
+    .finally(setIsLoading(false))
   }
 
   const closeSelection = (location) => {
+    setIsLoading(false)
     getAPIByLocation(location)
     setIsVisible(false)
-
   }
 
   useEffect(() => {
@@ -91,15 +92,12 @@ function App() {
         />
       </header>
       <main className='App-main'>
-      <h2 className='App-h2'>Residents</h2>
-        <ul className='App-ul'>
-          {currentResidents.map((url,index) => (
-            <ResidentInfo
-            url = {url}
-            key = {index}
-            />
-          ))}
-        </ul>
+        <h2 className='App-h2'>Residents</h2>
+        {
+          (currentResidents.length===0)
+          ?<span url = {null} key = {null} className='App-span--ul'>There are no residents at this location</span>
+          :<ul className='App-ul'> {currentResidents.map((url,index) => (<ResidentInfo url = {url} key = {index}/>))}</ul>
+        }
       </main>
       <footer className='App-footer'>
         <Pagination

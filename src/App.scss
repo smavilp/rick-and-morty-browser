@@ -183,6 +183,11 @@
     }
   }
 
+  &-span--ul{
+    @include font(var(--yellow), 1.75em, 700);
+    text-align: center;
+  }
+
   &-footer{
     padding: 3em 0;
     width: 100%;
